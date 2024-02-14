@@ -12,7 +12,8 @@ module priority encoder (e,y);
          8'b00001000:y=3'b100;
          8'b00000100:y=3'b101;
          8'b00000010:y=3'b110;
-         8'b10000001:y=3'b111;
+         8'b00000001:y=3'b111;
+        default:y=3'bxxx;
       endcase
         
     end 
