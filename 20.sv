@@ -6,7 +6,7 @@ input clk;
   always @ (posedge clk)
     begin
       temp<=temp<<1;
-      temp<=si;
+      temp[0]<=si;
     end
-  assign s0=temp
+  assign s0=temp[7]
     endmodule
