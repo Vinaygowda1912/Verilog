@@ -5,6 +5,7 @@ module logical shift (di,sel,o);
   reg [7:0]o;
   always @ (*)
     begin
+      case(sel)
       2'b00:o=d1;
       2'b01:o=d1<<1;
       2'b10:o=d2<<2;
