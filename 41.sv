@@ -3,10 +3,10 @@ module mult(a,b,clk,multi);
   input [17:0] a,b;
   output [35:0] multi;
   reg [35:0] multi;
-  wire [35:] mult_res;
+  wire [35:0] mult_res;
   input [17:0] a_in,b_in;
   reg [35:0] pipe_1,pipe_2,pipe_3;
-  assign multi_res = a_in*b_in;
+  assign multi_res = a_in * b_in;
 
   always @ (posedge clk)
     begin
