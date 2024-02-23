@@ -13,4 +13,21 @@ module counter ( clk,clr,up_down,q);
     end
   assign q=temp;
 endmodule
-  
+
+
+module counter_t();
+  reg clk,clr,up_down;
+  wire[3:0]q;
+  counter dut (.clk(clk),.clr(clr),.up_down(up_down),.q(q));
+  initial begin
+    clk=0;
+    clr=0;
+    up_down=0;
+    #10
+    clk=1;
+    #5
+    clr=1;
+    #5
+    up_down=1;
+    $finish();
+    endmodule
