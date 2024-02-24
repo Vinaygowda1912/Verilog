@@ -11,3 +11,32 @@ module counter (clk,clr,q);
     end
   assign q=temp;
 endmodule 
+
+
+module countert();
+  reg clk,clr;
+  wire signed [3:0]q;
+  counter dut(.clk(clk),.clr(clr),.q(q));
+  
+  always #5 clk=~clk;
+
+
+  
+  initial begin
+    
+    $dumpfile("dump.vcd");
+    $dumpvars(0);
+    clk=0;
+    clr=1;
+  
+    #5
+    clr=0;
+
+
+    #100
+ 
+    
+    $finish();
+    end
+endmodule
+        
