@@ -18,4 +18,29 @@ module priority encoder (e,y);
         
     end 
 endmodule
+
+
+module priorityencoder_t();
+  reg[7:0] e;
+  wire[2:0] y;
+  priorityencoder dut(.e(e),.y(y));
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    #5
+    e=8'b10000000;
+    #5
+    e=8'b01000000;
+    
+    #5
+    e=8'b00100000;
+    #5
+    e=8'b00010000;
+    #5
+    e=8'b00001000;
+    #100
+    $monitor("e=%b,y=%b",e,y);
+    $finish();
+  end
+endmodule
         
