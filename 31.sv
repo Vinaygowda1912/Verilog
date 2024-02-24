@@ -16,4 +16,27 @@ module decoder (s0,s1,s2,s3,y);
       endcase
     end 
 endmodule
+
+
+module decoder_t();
+  reg[2:0] s;
+  wire[7:0] y;
+  decoder dut(.s(s),.y(y));
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(1);
+    s=3'b000;
+    #5
+    s=3'b001;
+    #5
+    s=3'b010;
+    #5
+    s=3'b011;
+    #5
+    s=3'b100;
+    #100
+    $monitor("s=%b,y=%b",s,y);
+    $finish();
+  end
+endmodule
         
