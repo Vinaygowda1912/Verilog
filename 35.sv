@@ -4,9 +4,9 @@ module adder carry_in (a,b,cin,sum);
   output [7:0]sum;
   reg [7:0]sum;
   always @ (*)
-    begin 
+   
       sum = a+b+cin;
-    end
+ 
 endmodule
 
 
