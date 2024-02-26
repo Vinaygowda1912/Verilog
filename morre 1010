@@ -1,0 +1,108 @@
+module ss1(din,dout,clk,rst);
+  input din,clk,rst;
+  typedef enum logic[4:0]{s1,s2,s3,s4,s5}state_t;
+      state_t state;
+  output reg dout;
+
+  always @ (posedge clk or posedge rst)
+    begin
+      if(rst)
+        begin
+          state<=s1;
+          dout<=0;
+        end
+          else begin
+            case(state)
+              
+              s1:begin
+              if(din) begin
+                state<=s2;
+                dout=0;
+              end
+              else
+                begin
+                  state<=s1;
+                  dout<=0;
+                end
+              end
+              
+              s2:begin
+              if(din) begin
+                state<=s2;
+                dout=0;
+              end
+              else
+                begin
+                  state<=s3;
+                  dout<=0;
+                end
+              end
+              
+              s3:begin
+              if(din) begin
+                state<=s4;
+                dout=0;
+              end
+              else
+                begin
+                  state<=s1;
+                  dout<=0;
+                end
+              end
+              
+              s4:begin
+              if(din) begin
+                state<=s2;
+                dout=0;
+              end
+              else
+                begin
+                  state<=s5;
+                  dout<=1;
+                end
+              end
+              
+              s5:begin
+              if(din) begin
+                state<=s4;
+                dout=0;
+              end
+              else
+                begin
+                  state<=s1;
+                  dout<=0;
+                end
+              end
+            endcase
+          end
+              
+    end
+endmodule
+
+
+
+
+// Code your testbench here
+// or browse Examples
+module ss1_();
+  reg din,clk,rst;
+  wire dout;
+  ss1 dut(.din(din),.clk(clk),.rst(rst),.dout(dout));
+  always #5 clk=~clk;
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars();
+    
+    clk=0;
+    rst=0;
+    din=1;
+    @(posedge clk)
+    din=0;
+    @(posedge clk)
+    din=1;
+    @(posedge clk)
+    din=0;
+    @(posedge clk)
+    $finish();
+  end
+endmodule
