@@ -1,0 +1,81 @@
+module read(clk,addr,din,en,we,dout);
+  input clk,en;
+  input [3:0] din;
+  input  we;
+  output reg [3:0] dout;
+  input [4:0] addr;
+  reg [3:0] RAM [31:0];
+  always @ (posedge clk)
+    begin
+      if(en) begin
+        if(we) //write ==1
+          RAM[addr] <= din;//write
+        else//write==0 ->read
+        dout <= RAM[addr];//read
+          end
+          end
+          endmodule
+
+
+module read_t();
+  reg clk,en;
+  reg [3:0] din;
+  reg  we;
+  wire [3:0] dout;
+  reg [4:0] addr;
+  integer i;
+  
+  read dut(clk,addr,din,en,we,dout);
+  always #5 clk=~clk;
+  always #10 we= ~we;
+  
+  initial begin
+//     $monitor ("time = %t, clk=%b, en=%b, we=%b, din=%d, addr=%d, dout=%d", $time, clk, en, we,din, addr, dout );
+    $dumpfile("dump.vcd");
+              $dumpvars(1);
+    clk=0;
+    din=0;
+    addr=0;
+    en=0;
+    we=0;
+ #5 module read(clk,addr,din,en,we,dout);
+  input clk,en;
+  input [3:0] din;
+  input  we;
+  output reg [3:0] dout;
+  input [4:0] addr;
+  reg [3:0] RAM [31:0];
+  always @ (posedge clk)
+    begin
+      if(en) begin
+        if(we) //write ==1
+          RAM[addr] <= din;//write
+        else//write==0 ->read
+        dout <= RAM[addr];//read
+          end
+          end
+          endmodule
+    en=1;
+    //we=1;
+    #20
+    for(i=0; i<=32; i=i+1)
+    begin
+      addr=$urandom%20;
+      din=$urandom%20;
+      $monitor (" clk=%b, en=%b, we=%b, din=%d, addr=%d, dout=%d", clk, en, we,din, addr, dout );
+      #5; 
+    end
+    
+//     addr=1;
+//     din=8;
+//     #40
+//     addr=2;
+//     din=16;
+//     #80
+//     addr=3;
+//     din=32;
+    //#1000;
+    
+    $finish();
+  end
+endmodule
